@@ -20,11 +20,19 @@ HIDE_DATASET = True  # set False when 100% sure about repo quality
 ##################################
 # * After uploading to instance ##
 ##################################
-LICENSE: License = License.Custom(url="https://www.kaggle.com/datasets/intelecai/car-segmentation")
-APPLICATIONS: List[Union[Industry, Domain, Research]] = [Industry.Environmental(is_used=False)]
+LICENSE: License = License.Custom(
+    url="https://www.kaggle.com/datasets/intelecai/car-segmentation"
+)
+APPLICATIONS: List[Union[Industry, Domain, Research]] = [
+    Industry.Environmental(is_used=False)
+]
 CATEGORY: Category = Category.Environmental(extra=Category.Construction())
 
-CV_TASKS: List[CVTask] = [CVTask.InstanceSegmentation(),CVTask.SemanticSegmentation(),CVTask.ObjectDetection()]
+CV_TASKS: List[CVTask] = [
+    CVTask.InstanceSegmentation(),
+    CVTask.SemanticSegmentation(),
+    CVTask.ObjectDetection(),
+]
 ANNOTATION_TYPES: List[AnnotationType] = [AnnotationType.InstanceSegmentation()]
 
 RELEASE_DATE: Optional[str] = None  # e.g. "YYYY-MM-DD"
@@ -43,7 +51,9 @@ GITHUB_URL: str = "https://github.com/dataset-ninja/semantics-car-segmentation"
 ##################################
 ### * Optional after uploading ###
 ##################################
-DOWNLOAD_ORIGINAL_URL: Optional[Union[str, dict]] = ["https://www.kaggle.com/datasets/intelecai/car-segmentation"]
+DOWNLOAD_ORIGINAL_URL: Optional[Union[str, dict]] = [
+    "https://www.kaggle.com/datasets/intelecai/car-segmentation"
+]
 # Optional link for downloading original dataset (e.g. "https://some.com/dataset/download")
 
 CLASS2COLOR: Optional[Dict[str, List[str]]] = None
@@ -52,7 +62,9 @@ CLASS2COLOR: Optional[Dict[str, List[str]]] = None
 # If you have more than the one paper, put the most relatable link as the first element of the list
 # Use dict key to specify name for a button
 PAPER: Optional[Union[str, List[str], Dict[str, str]]] = None
-BLOGPOST: Optional[Union[str, List[str], Dict[str, str]]] = ["https://blog.intelec.ai/post/change-color-of-your-car/"]
+BLOGPOST: Optional[Union[str, List[str], Dict[str, str]]] = [
+    "https://blog.intelec.ai/post/change-color-of-your-car/"
+]
 REPOSITORY: Optional[Union[str, List[str], Dict[str, str]]] = None
 
 CITATION_URL: Optional[str] = None
@@ -76,7 +88,9 @@ SECTION_EXPLORE_CUSTOM_DATASETS: Optional[List[str]] = None
 def check_names():
     fields_before_upload = [PROJECT_NAME]  # PROJECT_NAME_FULL
     if any([field is None for field in fields_before_upload]):
-        raise ValueError("Please fill all fields in settings.py before uploading to instance.")
+        raise ValueError(
+            "Please fill all fields in settings.py before uploading to instance."
+        )
 
 
 def get_settings():
@@ -100,7 +114,9 @@ def get_settings():
     }
 
     if any([field is None for field in settings.values()]):
-        raise ValueError("Please fill all fields in settings.py after uploading to instance.")
+        raise ValueError(
+            "Please fill all fields in settings.py after uploading to instance."
+        )
 
     settings["release_date"] = RELEASE_DATE
     settings["download_original_url"] = DOWNLOAD_ORIGINAL_URL

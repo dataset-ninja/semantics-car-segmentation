@@ -10,6 +10,7 @@ import shutil
 
 from tqdm import tqdm
 
+
 def download_dataset(teamfiles_dir: str) -> str:
     """Use it for large datasets to convert them on the instance"""
     api = sly.Api.from_env()
@@ -31,7 +32,7 @@ def download_dataset(teamfiles_dir: str) -> str:
             total=fsize,
             unit="B",
             unit_scale=True,
-        ) as pbar:        
+        ) as pbar:
             api.file.download(team_id, teamfiles_path, local_path, progress_cb=pbar)
         dataset_path = unpack_if_archive(local_path)
 
@@ -48,7 +49,9 @@ def download_dataset(teamfiles_dir: str) -> str:
                     unit="B",
                     unit_scale=True,
                 ) as pbar:
-                    api.file.download(team_id, teamfiles_path, local_path, progress_cb=pbar)
+                    api.file.download(
+                        team_id, teamfiles_path, local_path, progress_cb=pbar
+                    )
 
                 sly.logger.info(f"Start unpacking archive '{file_name_with_ext}'...")
                 unpack_if_archive(local_path)
@@ -59,7 +62,8 @@ def download_dataset(teamfiles_dir: str) -> str:
 
         dataset_path = storage_dir
     return dataset_path
-    
+
+
 def count_files(path, extension):
     count = 0
     for root, dirs, files in os.walk(path):
@@ -67,16 +71,16 @@ def count_files(path, extension):
             if file.endswith(extension):
                 count += 1
     return count
-    
+
+
 def convert_and_upload_supervisely_project(
     api: sly.Api, workspace_id: int, project_name: str
 ) -> sly.ProjectInfo:
     ### Function should read local dataset and upload it to Supervisely project, then return project info.###
-    images_path = os.path.join("car-segmentation","images")
-    anns_path =  os.path.join("car-segmentation","masks.json")
+    images_path = os.path.join("car-segmentation", "images")
+    anns_path = os.path.join("car-segmentation", "masks.json")
     batch_size = 10
     ds_name = "ds"
-
 
     def create_ann(image_path):
         labels = []
@@ -105,19 +109,18 @@ def convert_and_upload_supervisely_project(
 
         return sly.Annotation(img_size=(img_height, img_wight), labels=labels)
 
-
     obj_class_car = sly.ObjClass("car", sly.AnyGeometry, color=(0, 255, 255))
     obj_class_wheel = sly.ObjClass("wheel", sly.AnyGeometry, color=(128, 0, 0))
     obj_class_lights = sly.ObjClass("lights", sly.AnyGeometry, color=(255, 255, 0))
     obj_class_window = sly.ObjClass("window", sly.AnyGeometry, color=(128, 128, 0))
 
-
-    project = api.project.create(workspace_id, project_name, change_name_if_conflict=True)
+    project = api.project.create(
+        workspace_id, project_name, change_name_if_conflict=True
+    )
     meta = sly.ProjectMeta(
         obj_classes=[obj_class_car, obj_class_wheel, obj_class_lights, obj_class_window]
     )
     api.project.update_meta(project.id, meta.to_json())
-
 
     ann_data = load_json_file(anns_path)["assets"]
 
@@ -130,8 +133,9 @@ def convert_and_upload_supervisely_project(
         name_to_shape[im_name] = im_shape
         regions = image_data["regions"]
         for region in regions:
-            name_to_data[im_name].append([region["tags"][0], region["boundingBox"], region["points"]])
-
+            name_to_data[im_name].append(
+                [region["tags"][0], region["boundingBox"], region["points"]]
+            )
 
     images_names = os.listdir(images_path)
 
@@ -140,14 +144,18 @@ def convert_and_upload_supervisely_project(
     progress = sly.Progress("Create dataset {}".format(ds_name), len(images_names))
 
     for img_names_batch in sly.batched(images_names, batch_size=batch_size):
-        images_pathes_batch = [os.path.join(images_path, image_name) for image_name in img_names_batch]
+        images_pathes_batch = [
+            os.path.join(images_path, image_name) for image_name in img_names_batch
+        ]
 
-        img_infos = api.image.upload_paths(dataset.id, img_names_batch, images_pathes_batch)
+        img_infos = api.image.upload_paths(
+            dataset.id, img_names_batch, images_pathes_batch
+        )
         img_ids = [im_info.id for im_info in img_infos]
 
         anns_batch = [create_ann(image_path) for image_path in images_pathes_batch]
         api.annotation.upload_anns(img_ids, anns_batch)
 
         progress.iters_done_report(len(img_names_batch))
-    
+
     return project
