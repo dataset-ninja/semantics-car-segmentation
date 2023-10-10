@@ -1,4 +1,4 @@
-**Segmentation of Car Parts** is a dataset for instance segmentation, semantic segmentation, and object detection tasks. Possible applications of the dataset could be in the environmental industry. 
+**Segmentation of Car Parts** is a dataset for instance segmentation, semantic segmentation, and object detection tasks. Possible applications of the dataset could be in the retail industry. 
 
 The dataset consists of 211 images with 3670 labeled objects belonging to 4 different classes including *car*, *wheel*, *window*, and other: *lights*. There are no pre-defined <i>train/val/test</i> splits in the dataset. The dataset was released in 2021 by the INTELEC.AI.
 
