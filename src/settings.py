@@ -24,7 +24,7 @@ LICENSE: License = License.Custom(
     url="https://www.kaggle.com/datasets/intelecai/car-segmentation"
 )
 APPLICATIONS: List[Union[Industry, Domain, Research]] = [
-    Industry.Environmental(is_used=False)
+    Industry.Retail(is_used=False)
 ]
 CATEGORY: Category = Category.Environmental(extra=Category.Retail())
 
