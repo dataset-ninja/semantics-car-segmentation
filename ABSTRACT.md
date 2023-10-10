@@ -1,10 +1,10 @@
 **Car Segmentation** dataset encompasses 211 car side view images, meticulously annotated into four distinct classes: *car*, *wheel*, *lights*, and *window*. The dataset creation process involved a comprehensive approach, including image gathering through various methods and detailed mask annotation using [VoTT](https://github.com/microsoft/VoTT), ultimately culminating in a valuable resource for training and developing object recognition models. For those interested in utilizing the dataset without manual annotation, a pre-annotated dataset has been thoughtfully provided by the creator for use in training models.
 
-Firstly, the dataset creator needs to gather a substantial collection of car side view images. Multiple methods can be utilized for this purpose:
+First, the dataset creator gathered a substantial collection of car side-view images, using multiple methods for this purpose:
 
-Unsplash: Unsplash is a valuable resource that offers a wide range of images with permissive copyright terms. While it's a great platform for acquiring images, it's worth noting that there may be limitations in finding images specifically depicting car side views.
+[Unsplash](https://unsplash.com/): Unsplash is a valuable resource that offers a wide range of images with permissive copyright terms. While it's a great platform for acquiring images, it's worth noting that there may be limitations in finding images specifically depicting car side views.
 
-Google Images: Utilizing extensions available in web browsers like Google Chrome and Firefox, one can conveniently download all the images from the active tab. This is particularly useful when searching for images using specific keywords like "car side," with the option to exclude undesired results using the "-" symbol.
+[Google Images](https://images.google.com/): Utilizing extensions available in web browsers like Google Chrome and Firefox, one can conveniently download all the images from the active tab. This is particularly useful when searching for images using specific keywords like "car side," with the option to exclude undesired results using the "-" symbol.
 
 Capturing Images in the Field: If the dataset creator possesses a suitable camera, they have the option to capture images themselves by venturing outdoors. However, it's essential to be mindful of privacy and copyright concerns, especially when planning to share the dataset publicly. Blurring people's faces and license plates is a prudent measure in this case.
 
