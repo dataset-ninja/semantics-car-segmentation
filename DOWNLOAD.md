@@ -1,6 +1,6 @@
 Dataset **Car Segmentation** can be downloaded in [Supervisely format](https://developer.supervisely.com/api-references/supervisely-annotation-json-format):
 
- [Download](https://www.dropbox.com/scl/fi/vztukraqjummy13xtyq6n/car-segmentation-DatasetNinja.tar?rlkey=l0ka40pl0ab4xgkl7d6ayjywu&dl=1)
+ [Download](https://assets.supervisely.com/remote/eyJsaW5rIjogImZzOi8vYXNzZXRzLzI1MDRfQ2FyIFNlZ21lbnRhdGlvbi9jYXItc2VnbWVudGF0aW9uLURhdGFzZXROaW5qYS50YXIiLCAic2lnIjogIkg4czh1ZnJMZUw3ajBtMFJPQ0pxeXhVZCt2aWU4eXZ0bkFTOWlYOHRLWUE9In0=)
 
 As an alternative, it can be downloaded with *dataset-tools* package:
 ``` bash
